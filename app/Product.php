@@ -40,4 +40,19 @@ class Product extends Model
         return $this->hasMany('App\Cart','product_id','id');
     }
 
+    public function images()
+    {
+        return $this->hasMany('App\Images','product_id','id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Review', 'product_id','id');
+    }
+
+    public function wishlist()
+    {
+        return $this->hasMany('App\Wishlist', 'product_id','id');
+    }
+
 }

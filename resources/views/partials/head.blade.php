@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <title>
-    {{ trans('global.global_title') }}
+    statelyperfumes
 </title>
 
 <meta http-equiv="X-UA-Compatible"

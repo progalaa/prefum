@@ -118,6 +118,23 @@
 
                 <div class="col-xs-12 form-group">
                     <div class="col-md-6 form-group">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        {!! Form::label('images', 'البوم صور', ['class' => 'control-label']) !!}
+                        <input type="file" name="images[]" multiple />
+                        <p class="help-block"></p>
+                        @if($errors->has('images'))
+                            <p class="help-block">
+                                {{ $errors->first('images') }}
+                            </p>
+                        @endif
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 form-group">
+                    <div class="col-md-6 form-group">
                         {!! Form::label('execlusive', 'حصري', ['class' => 'control-label']) !!}<br />
 
 

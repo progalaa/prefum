@@ -1,15 +1,49 @@
 <?php
-/*Route::get('/', function ()
-{
-    return redirect()->route('/maintainance');
-}
-);*/
-Route::get('/', 'HomeController@maintainance');
+
+/***************************  Website Routes   ****************************/
+Route::get('/{locale}', 'HomeController@main')->name('home');
+Route::get('/{locale}/menu/{men_id}', 'HomeController@menu')->name('menu');
+Route::get('/{locale}/category/{cat_id}', 'HomeController@category')->name('category');
+Route::get('/{locale}/subCat/{sub_id}', 'HomeController@subCat')->name('subCat');
+Route::get('/{locale}/product/{pro_id}', 'HomeController@product')->name('product');
+Route::get('/{locale}/login', 'HomeController@login')->name('login');
+Route::get('/{locale}/wishlist', 'HomeController@wishlist')->name('wishlist');
+
+
+$this->post('review', 'HomeController@review')->name('review');
+
+Route::post('/AddWishlist','HomeController@AddWishlist')->name('AddWishlist');
+
+
+
+
+/***************************  Cpanel Routes   ****************************/
 
 // Authentication Routes...
-$this->get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
-$this->post('login', 'Auth\LoginController@login')->name('auth.login');
+$this->get('admin/login', 'Auth\LoginController@showLoginForm')->name('auth.login');
+
+$this->post('register', 'Auth\RegisterController@register')->name('register');
+//$this->post('login', 'Auth\LoginController@login')->name('auth.login');
+
+Route::post('login', function()
+{
+    $credentials = \Illuminate\Support\Facades\Input::only('email', 'password');
+    if ( ! Auth::attempt($credentials))
+    {
+        return Redirect::back()->withMessage('Invalid credentials');
+    }
+    if (Auth::user()->admin == 1)
+    {
+        return Redirect::to('/admin/home');
+    }
+    return Redirect::to('/en');
+});
+
+
+
+//$this->post('logout', 'Auth\LoginController@logout')->name('auth.logout');
 $this->post('logout', 'Auth\LoginController@logout')->name('auth.logout');
+
 
 // Change Password Routes...
 $this->get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');

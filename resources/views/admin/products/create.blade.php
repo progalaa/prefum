@@ -113,12 +113,29 @@
                         @endif
                     </div>
 
-
                 </div>
 
                 <div class="col-xs-12 form-group">
                     <div class="col-md-6 form-group">
-                        {!! Form::label('execlusive', 'حصري', ['class' => 'control-label']) !!}<br />
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        {!! Form::label('images', 'البوم صور', ['class' => 'control-label']) !!}
+                        <input type="file" name="images[]" multiple />
+                        <p class="help-block"></p>
+                        @if($errors->has('images'))
+                            <p class="help-block">
+                                {{ $errors->first('images') }}
+                            </p>
+                        @endif
+                    </div>
+
+                </div>
+
+
+                <div class="col-xs-12 form-group">
+                    <div class="col-md-6 form-group">
+                        {!! Form::label('execlusive', 'حصري', ['class' => 'control-label']) !!}<br/>
 
 
                         <select class="form-control" name="execlusive">
@@ -130,7 +147,7 @@
 
 
                     <div class="col-md-6 form-group">
-                        {!! Form::label('offer', 'عروض', ['class' => 'control-label']) !!}<br />
+                        {!! Form::label('offer', 'عروض', ['class' => 'control-label']) !!}<br/>
 
 
                         <select class="form-control" name="offer">
@@ -144,18 +161,19 @@
 
                 <div class="col-xs-12 form-group">
                     <div class="col-md-6 form-group">
-                        {!! Form::label('category_id', 'القسم الرئيسي', ['class' => 'control-label']) !!}<br />
+                        {!! Form::label('category_id', 'القسم الرئيسي', ['class' => 'control-label']) !!}<br/>
                         <select class="form-control" name="category_id">
                             <option value=""></option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id  }}">{{ $category->name_ar }} -- {{ $category->name_en }}</option>
+                                <option value="{{ $category->id  }}">{{ $category->name_ar }}
+                                    -- {{ $category->name_en }}</option>
                             @endforeach
                         </select>
                     </div>
 
 
                     <div class="col-md-6 form-group">
-                        {!! Form::label('menu_item_id', 'القائمة', ['class' => 'control-label']) !!}<br />
+                        {!! Form::label('menu_item_id', 'القائمة', ['class' => 'control-label']) !!}<br/>
 
 
                         <select class="form-control" name="menu_item_id">
@@ -170,26 +188,28 @@
 
                 <div class="col-xs-12 form-group">
                     <div class="col-md-6 form-group">
-                        {!! Form::label('brand_id', 'العلامة التجارية', ['class' => 'control-label']) !!}<br />
+                        {!! Form::label('brand_id', 'العلامة التجارية', ['class' => 'control-label']) !!}<br/>
 
 
                         <select class="form-control" name="brand_id">
                             <option value=""></option>
                             @foreach ($brands as $brand)
-                                <option value="{{ $brand->id  }}">{{ $brand->name_ar }} -- {{ $brand->name_en }}</option>
+                                <option value="{{ $brand->id  }}">{{ $brand->name_ar }}
+                                    -- {{ $brand->name_en }}</option>
                             @endforeach
                         </select>
                     </div>
 
 
                     <div class="col-md-6 form-group">
-                        {!! Form::label('sub_category_id', 'القسم الفرعي', ['class' => 'control-label']) !!}<br />
+                        {!! Form::label('sub_category_id', 'القسم الفرعي', ['class' => 'control-label']) !!}<br/>
 
 
                         <select class="form-control" name="sub_category_id">
                             <option value=""></option>
                             @foreach ($sub_categories as $sub_category)
-                                <option value="{{ $sub_category->id  }}">{{ $sub_category->name_ar }} -- {{ $sub_category->name_en }}</option>
+                                <option value="{{ $sub_category->id  }}">{{ $sub_category->name_ar }}
+                                    -- {{ $sub_category->name_en }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -203,7 +223,7 @@
 
 
                     <div class="col-md-6 form-group">
-                        {!! Form::label('status', 'حاله المنتج', ['class' => 'control-label']) !!}<br />
+                        {!! Form::label('status', 'حاله المنتج', ['class' => 'control-label']) !!}<br/>
 
 
                         <select class="form-control" name="status">
@@ -215,7 +235,6 @@
                     </div>
 
                 </div>
-
 
 
             </div>

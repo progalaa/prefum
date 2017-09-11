@@ -20,6 +20,8 @@ class Category extends Model
         return $this->belongsTo('App\Menu', 'menu_item_id','id');
     }
 
+
+
     public function products()
     {
         return $this->hasMany('App\Product', 'category_id','id');

@@ -1,0 +1,166 @@
+@import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+h1,h2,h3,h4,h5,h6,li,a,div,p{
+    font-family: 'Droid Arabic Kufi', serif;
+}
+html{
+    direction: rtl !important;
+}
+.margin-0{
+    margin: 0px !important;
+}
+.logo img{
+height:100px;
+}
+#topBar ul.top-links{
+    margin-top: 2%;
+}
+#topBar ul.dropdown-menu>li>a {
+    padding: 8px 6px 8px 25px;
+    font-size: 12px;
+    transition: .5s;
+}
+#topBar ul.dropdown-menu>li>a:hover{
+    padding-right: 8px;
+    padding-left: 23px;
+}
+#topBar ul.top-links>li>a>i{
+    opacity: 1;
+}
+#topBar .dropdown-menu.pull-right {
+    left: auto;
+    right: 0px;
+    float: right;
+}
+#topBar ul.top-links>li>a>img.flag-lang{
+    float: right;
+    margin-left: 5px;
+}
+#topMain.nav-pills>li>a.dropdown-toggle:after {
+    position: absolute;
+    top: 50%;
+    right:100%;
+    
+    
+}
+#topNav #topMain>li.mega-menu div.row div{
+    float: right;
+    border: none;
+    padding-bottom: 10px;
+}
+#topNav ul.dropdown-menu li{
+    border: none;
+}
+#topNav #topMain>li{
+    border-bottom: 2px solid transparent;
+    transition: .7s;
+}
+#topNav #topMain>li.active,#topNav #topMain>li:hover{
+    border-bottom: 2px solid #b99552;
+   
+}
+#topNav ul.dropdown-menu li>a{
+    transition: .6s;
+}
+#topNav ul.dropdown-menu li:hover>a{
+    padding-right: 20px;
+}
+section{
+    padding: 20px 0px;
+}
+.shop-item{
+    position: relative;
+}
+.shop-item .thumbnail{
+    overflow: hidden;
+}
+.shop-item .thumbnail .shop-item-hover{
+    position: absolute;
+    background-color: rgba(185, 149, 82, 0.7);
+    width: 100%;
+    height: 50px;
+    top: 100%;
+    left: 0px;
+    transition: .6s;
+    z-index: 9999;
+    padding: 5px;
+    text-align: center;
+    
+}
+.shop-item .thumbnail .shop-item-hover a{
+    color: #fff;
+    border: 2px solid #fff;
+    
+}
+.shop-item .thumbnail .shop-item-hover a:hover{
+    background-color: #fff;
+    border-color: rgba(185, 149, 82, 1);
+    color: rgba(185, 149, 82, 1);
+    font-size: 12px;
+}
+.shop-item:hover .thumbnail .shop-item-hover{
+    top: 75%;
+}
+div.shop-item>.thumbnail>a.shop-item-image>img{
+    height: 180px;
+}
+span.badge-aqua{
+    background: #b99552 !important;
+}
+.footer-logo img{
+    height: 100px;
+}
+.radio i, .checkbox i{
+    width: 15px;
+    height: 15px;
+}
+.checkbox {
+    padding-left: 0;
+    padding-right: 19px;
+    font-size: 12px;
+}
+#zoom-primary .single-img{
+        width: 360px;
+    height: auto;
+}
+#zoom-primary .zoomImg{
+      width: 200% !important;
+    height: auto !important;
+}
+div.shop-item-price{
+    font-size: 16px;
+    margin-top: 0px;
+}
+.single-product-title{
+    font-size: 20px;
+}
+.form-group{
+    text-align: right;
+}
+.cartContent .product_name{
+    float: right;
+    width: 30%;
+    text-align: center;
+}
+.cartContent a.product_name{
+    text-align: right;
+}
+
+.cartContent a.remove_item,.cartContent .remove_item{
+    float: left;
+}
+.cartContent .qty{
+    width: 25%;
+    float: left;
+    
+}
+
+.cartContent .total_price{
+    float: left;
+    width: 25%;
+}
+.cartContent{
+    text-align: right;
+}
+.cart_img img{
+    height: 60px;
+}

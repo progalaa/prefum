@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Brand;
 use App\Category;
+use App\Images;
 use App\Menu;
 use App\Product;
 use App\SubCat;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\UploadedFile;
+use App\Http\Requests\UploadRequest;
 
 class ProductsController extends Controller
 {
@@ -21,7 +24,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('crud')) {
+        if (!Gate::allows('crud')) {
             return abort(401);
         }
 
@@ -31,22 +34,19 @@ class ProductsController extends Controller
     }
 
 
-    public function ajax(Request $request){
+    public function ajax(Request $request)
+    {
         $product = Product::findOrFail($request->product_id);
         $status = $request->status;
-        //dd($request->product_id);
-        if($status == 1)
-        {
-           $product->status = 0;
-        }
-        elseif($status == 0)
-        {
+        if ($status == 1) {
+            $product->status = 0;
+        } elseif ($status == 0) {
             $product->status = 1;
         }
         return response()->json([
-          'data' =>[
-              'success'=> $product->save(),
-          ]
+            'data' => [
+                'success' => $product->save(),
+            ]
         ]);
     }
 
@@ -57,7 +57,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('crud')) {
+        if (!Gate::allows('crud')) {
             return abort(401);
         }
         $products = Product::all();
@@ -71,41 +71,49 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if (! Gate::allows('crud')) {
+        if (!Gate::allows('crud')) {
             return abort(401);
-        }
-        else{
-            if (Input::hasFile('image'))
-            {
-                $name = time().'.'.$request->image->getClientOriginalExtension();
+        } else {
+            if (Input::hasFile('image')) {
+                $name = time() . '.' . $request->image->getClientOriginalExtension();
                 $destinationPath = public_path('/images');
-                Input::file('image')->move($destinationPath,$name);
+                Input::file('image')->move($destinationPath, $name);
                 $data = array(
-                    'name_ar'=>$request->get('name_ar'),
-                    'name_en'=>$request->get('name_en'),
-                    'image'=>$name,
-                    'title_ar'=>$request->get('title_ar'),
-                    'title_en'=>$request->get('title_en'),
-                    'description_ar'=>$request->get('description_ar'),
-                    'description_en'=>$request->get('description_en'),
-                    'price'=>$request->get('price'),
-                    'execlusive'=>$request->get('execlusive'),
-                    'offer'=>$request->get('offer'),
-                    'status'=>$request->get('status'),
-                    'menu_item_id'=>$request->get('menu_item_id'),
-                    'category_id'=>$request->get('category_id'),
-                    'sub_category_id'=>$request->get('sub_category_id'),
-                    'brand_id'=>$request->get('brand_id')
+                    'name_ar' => $request->get('name_ar'),
+                    'name_en' => $request->get('name_en'),
+                    'image' => $name,
+                    'title_ar' => $request->get('title_ar'),
+                    'title_en' => $request->get('title_en'),
+                    'description_ar' => $request->get('description_ar'),
+                    'description_en' => $request->get('description_en'),
+                    'price' => $request->get('price'),
+                    'execlusive' => $request->get('execlusive'),
+                    'offer' => $request->get('offer'),
+                    'status' => $request->get('status'),
+                    'menu_item_id' => $request->get('menu_item_id'),
+                    'category_id' => $request->get('category_id'),
+                    'sub_category_id' => $request->get('sub_category_id'),
+                    'brand_id' => $request->get('brand_id')
                 );
-                Product::create($data);
+                $prod = Product::create($data);
+                foreach($request->images as $key=>$photo) {
+                    $filename = $photo;
+                    $name = time().$key.'.'.$filename->getClientOriginalExtension();
+                    $destinationPath = public_path('/images');
+                    $photo->move($destinationPath, $name);
+                    Images::create([
+                        'product_id' => $prod->id,
+                        'image' => $name
+                    ]);
+                }
+
                 return redirect()->route('admin.products.index');
-            }
-            else{
+            } else {
                 Product::create($request->all());
                 return redirect()->route('admin.products.index');
             }
@@ -117,7 +125,7 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -128,12 +136,12 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('crud')) {
+        if (!Gate::allows('crud')) {
             return abort(401);
         }
         $product = Product::findOrFail($id);
@@ -147,47 +155,58 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         if (!Gate::allows('crud')) {
             return abort(401);
-        } else
-        {
-            if (Input::hasFile('image')){
+        } else {
+            if (Input::hasFile('image')) {
                 $products = Product::findOrFail($id);
-                if (Input::hasFile('image') == null){
+                if (Input::hasFile('image') == null) {
                     $request->image = $products->image;
                 }
-                $name = time().'.'.$request->image->getClientOriginalExtension();
+                $name = time() . '.' . $request->image->getClientOriginalExtension();
                 $destinationPath = public_path('/images');
-                Input::file('image')->move($destinationPath,$name);
+                Input::file('image')->move($destinationPath, $name);
 
                 $data = array(
-                    'name_ar'=>$request->get('name_ar'),
-                    'name_en'=>$request->get('name_en'),
-                    'image'=>$name,
-                    'title_ar'=>$request->get('title_ar'),
-                    'title_en'=>$request->get('title_en'),
-                    'description_ar'=>$request->get('description_ar'),
-                    'description_en'=>$request->get('description_en'),
-                    'price'=>$request->get('price'),
-                    'execlusive'=>$request->get('execlusive'),
-                    'offer'=>$request->get('offer'),
-                    'status'=>$request->get('status'),
-                    'menu_item_id'=>$request->get('menu_item_id'),
-                    'category_id'=>$request->get('category_id'),
-                    'sub_category_id'=>$request->get('sub_category_id'),
-                    'brand_id'=>$request->get('brand_id')
+                    'name_ar' => $request->get('name_ar'),
+                    'name_en' => $request->get('name_en'),
+                    'image' => $name,
+                    'title_ar' => $request->get('title_ar'),
+                    'title_en' => $request->get('title_en'),
+                    'description_ar' => $request->get('description_ar'),
+                    'description_en' => $request->get('description_en'),
+                    'price' => $request->get('price'),
+                    'execlusive' => $request->get('execlusive'),
+                    'offer' => $request->get('offer'),
+                    'status' => $request->get('status'),
+                    'menu_item_id' => $request->get('menu_item_id'),
+                    'category_id' => $request->get('category_id'),
+                    'sub_category_id' => $request->get('sub_category_id'),
+                    'brand_id' => $request->get('brand_id')
                 );
+
+                foreach($request->images as $key=>$photo) {
+                    $filename = $photo;
+                    $name = time().$key.'.'.$filename->getClientOriginalExtension();
+                    $destinationPath = public_path('/images');
+                    $photo->move($destinationPath, $name);
+                    Images::create([
+                        'product_id' => $id,
+                        'image' => $name
+                    ]);
+                }
 
                 $products->update($data);
 
+
                 return redirect()->route('admin.products.index');
-            }else{
+            } else {
                 $products = Product::findOrFail($id);
                 $products->update($request->all());
 
@@ -199,12 +218,12 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('crud')) {
+        if (!Gate::allows('crud')) {
             return abort(401);
         }
         $products = Product::findOrFail($id);
@@ -215,7 +234,7 @@ class ProductsController extends Controller
 
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('crud')) {
+        if (!Gate::allows('crud')) {
             return abort(401);
         }
         if ($request->input('ids')) {
