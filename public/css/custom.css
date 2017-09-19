@@ -148,6 +148,8 @@ div.shop-item-price{
 .cartContent a.remove_item,.cartContent .remove_item{
     float: left;
 }
+
+
 .cartContent .qty{
     width: 25%;
     float: left;

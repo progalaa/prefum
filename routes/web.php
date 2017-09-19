@@ -7,12 +7,24 @@ Route::get('/{locale}/category/{cat_id}', 'HomeController@category')->name('cate
 Route::get('/{locale}/subCat/{sub_id}', 'HomeController@subCat')->name('subCat');
 Route::get('/{locale}/product/{pro_id}', 'HomeController@product')->name('product');
 Route::get('/{locale}/login', 'HomeController@login')->name('login');
-Route::get('/{locale}/wishlist', 'HomeController@wishlist')->name('wishlist');
+
+
 
 
 $this->post('review', 'HomeController@review')->name('review');
 
+// wishlist routes
+Route::get('/{locale}/wishlist', 'HomeController@wishlist')->name('wishlist');
 Route::post('/AddWishlist','HomeController@AddWishlist')->name('AddWishlist');
+Route::post('/deleteWishlistItem','HomeController@deleteWishlistItem')->name('deleteWishlistItem');
+
+//cart routes
+Route::get('/{locale}/cart', 'HomeController@cart')->name('Webcart');
+Route::post('/AddCart','HomeController@AddCart')->name('AddCart');
+Route::post('/updateCartQty','HomeController@updateCartQty')->name('updateCartQty');
+Route::post('/deleteCartItem','HomeController@deleteCartItem')->name('deleteCartItem');
+Route::post('/clearCart','HomeController@clearCart')->name('clearCart');
+Route::post('/updateCart','HomeController@updateCart')->name('updateCart');
 
 
 

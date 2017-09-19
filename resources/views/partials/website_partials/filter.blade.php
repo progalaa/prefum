@@ -59,27 +59,7 @@
 
             </ul>
         </li>
-        <li class="list-group-item">
-            <a class="dropdown-toggle" href="#">الحجم</a>
-            <ul>
-                <li><a href="#"><label class="checkbox">
-                            <input type="checkbox" value="1">
-                            <i></i> 5ml
-                        </label></a></li>
-                <li><a href="#"><label class="checkbox">
-                            <input type="checkbox" value="1">
-                            <i></i> 25ml
-                        </label></a></li>
-                <li><a href="#"><label class="checkbox">
-                            <input type="checkbox" value="1">
-                            <i></i> 55ml
-                        </label></a></li>
-                <li><a href="#"><label class="checkbox">
-                            <input type="checkbox" value="1">
-                            <i></i> 105ml
-                        </label></a></li>
-            </ul>
-        </li>
+
 
 
     </ul>

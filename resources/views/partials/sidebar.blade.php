@@ -112,7 +112,7 @@
                 </a>
             </li>
 
-            <li class="{{ $request->segment(2) == 'cart' ? 'active active-sub' : '' }}">
+        <!--  <li class="{{ $request->segment(2) == 'cart' ? 'active active-sub' : '' }}">
                 <a href="{{ route('admin.cart.index') }}">
                     <i class="fa fa-cart-plus"></i>
                             <span class="title">
@@ -128,25 +128,25 @@
                                سجل الطلبات
                             </span>
                 </a>
-            </li>
+            </li>-->
 
-            <li class="{{ $request->segment(2) == 'site_users' ? 'active active-sub' : '' }}">
+      <!--  <li class="{{ $request->segment(2) == 'site_users' ? 'active active-sub' : '' }}">
                 <a href="{{ route('admin.site_users.index') }}">
                     <i class="fa fa-users"></i>
                             <span class="title">
                                مستخدمي الموقع
                             </span>
                 </a>
-            </li>
+            </li>-->
 
 
-
+<!--
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">
                     <i class="fa fa-key"></i>
                     <span class="title">تعديل كلمة المرور</span>
                 </a>
-            </li>
+            </li>-->
 
             <li>
                 <a href="#logout" onclick="$('#logout').submit();">

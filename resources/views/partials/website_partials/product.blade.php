@@ -109,21 +109,19 @@
                 <!-- /short description -->
 
                 <hr/>
-                <form class="clearfix form-inline nomargin" method="get" action="cart.html">
-                    <input type="hidden" name="product_id" value="1"/>
-
-                    <input type="hidden" id="qty" name="qty" value="1"/>
 
 
                     <div class="btn-group pull-left product-opt-qty">
-                        <input type="number" class="form-control" placeholder="ادخل الكمية الطلوبة"/>
+                        <input type="number" id="qty" class="form-control" placeholder="ادخل الكمية الطلوبة"/>
                     </div><!-- /btn-group -->
 
-                    <button class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"><i
+                    <input type="hidden" id="cart_url" value="{{ route('AddCart') }}">
+                    <button id="add_cart" class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"
+                            data-user="{{ Auth::user()->id }}" data-product="{{$product->id}}"><i
                                 class="fa fa-shopping-cart"></i>
                         <span>اضف الى عربة التسوق</span></button>
 
-                </form>
+
                 <!-- /FORM -->
 
 

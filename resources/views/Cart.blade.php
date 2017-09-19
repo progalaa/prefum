@@ -17,7 +17,7 @@
 <div id="wrapper">
     @include('partials/website_partials/header')
 
-    @include('partials/website_partials/wishlist')
+    @include('partials/website_partials/cart')
 
     <footer id="footer">
         @include('partials/website_partials/footer')

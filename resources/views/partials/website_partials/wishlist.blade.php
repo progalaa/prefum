@@ -37,7 +37,6 @@
                         <?php
                           $sum =0;
                         ?>
-
                     @foreach($wishlist as $wish)
 
                         <!-- cart item -->
@@ -54,7 +53,12 @@
                                         <span>{{$wish->products->name_en}}</span>
                                     @endif
                                 </a>
-                                <a href="#" class="remove_item"><i class="fa fa-times"></i></a>
+
+                                <input type="hidden" id="delete_url" value="{{ route('deleteWishlistItem') }}">
+
+                                <a class="remove_item" id="remove_wishlist" data-id="{{$wish->id}}" data-user="{{ Auth::user()->id }}" data-product="{{$wish->product_id}}">
+                                    <i class="fa fa-times"></i>
+                                </a>
                                 <div class="total_price">$<span>{{$wish->products->price}}</span></div>
 
                                 <div class="clearfix"></div>
@@ -70,12 +74,10 @@
 
 
                     <!-- update cart -->
-                        <button class="btn btn-success margin-top-20 margin-right-10 pull-right"><i
+                        <a class="btn btn-success margin-top-20 margin-right-10 pull-right" href="{{route('wishlist',['locale'=>app()->getLocale()])}}"><i
                                     class="glyphicon glyphicon-ok"></i> تحديث
-                        </button>
-                        <button class="btn btn-danger margin-top-20 margin-right-10 pull-right"><i
-                                    class="glyphicon glyphicon-remove"></i> مسح قائمة الامنيات
-                        </button>
+                        </a>
+
                         <!-- /update cart -->
 
                         <div class="clearfix"></div>
@@ -88,64 +90,7 @@
             </div>
 
 
-            <!-- RIGHT -->
-            <div class="col-lg-3 col-sm-4">
 
-                <!-- TOGGLE -->
-                <div class="toggle-transparent toggle-bordered-full clearfix">
-
-                    <div class="toggle nomargin-top">
-                        <label>بطاقة التخفيض</label>
-
-                        <div class="toggle-content">
-                            <p>أدخل كود التخفيض.</p>
-
-                            <form action="#" method="post" class="nomargin">
-                                <input type="text" id="cart-code" name="cart-code"
-                                       class="form-control text-center margin-bottom-10" placeholder="Voucher Code"
-                                       required="required">
-                                <button class="btn btn-primary btn-block" type="submit">تأكيد</button>
-                            </form>
-                        </div>
-                    </div>
-
-
-                </div>
-                <!-- /TOGGLE -->
-
-                <div class="toggle-transparent toggle-bordered-full clearfix">
-                    <div class="toggle active">
-                        <div class="toggle-content">
-
-										<span class="clearfix">
-											<span class="pull-right">$<?php echo $sum; ?></span>
-											<strong class="pull-left">السعر قبل الخصم:</strong>
-										</span>
-										<span class="clearfix">
-											<span class="pull-right">$0.00</span>
-											<span class="pull-left">تخفيض:</span>
-										</span>
-										<span class="clearfix">
-											<span class="pull-right">$0.00</span>
-											<span class="pull-left">الشخن:</span>
-										</span>
-
-                            <hr/>
-
-										<span class="clearfix">
-											<span class="pull-right size-20">$<?php echo $sum; ?></span>
-											<strong class="pull-left">الاجمالى:</strong>
-										</span>
-
-                            <hr/>
-
-                            <a href="shop-checkout.html" class="btn btn-primary btn-lg btn-block size-15"><i
-                                        class="fa fa-mail-forward"></i> اكمل عملية الشراء</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
 
         </div>
         <!-- /CART -->
