@@ -112,6 +112,24 @@
                 </a>
             </li>
 
+            <li class="{{ $request->segment(2) == 'emails' ? 'active active-sub' : '' }}">
+                <a href="{{ route('admin.emails.index') }}">
+                    <i class="fa fa-user"></i>
+                            <span class="title">
+                               أعضاء القائمة البريدية
+                            </span>
+                </a>
+            </li>
+
+            <li class="{{ $request->segment(2) == 'mailing_list' ? 'active active-sub' : '' }}">
+                <a href="{{ route('admin.mailing_list.index') }}">
+                    <i class="fa fa-envelope-open"></i>
+                            <span class="title">
+                                القائمة البريدية
+                            </span>
+                </a>
+            </li>
+
         <!--  <li class="{{ $request->segment(2) == 'cart' ? 'active active-sub' : '' }}">
                 <a href="{{ route('admin.cart.index') }}">
                     <i class="fa fa-cart-plus"></i>

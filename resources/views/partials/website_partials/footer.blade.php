@@ -45,10 +45,9 @@
                 <!-- Links -->
                 <h4 class="letter-spacing-1">اكتشف موقعنا</h4>
                 <ul class="footer-links list-unstyled">
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#">أخر عروضنا</a></li>
-                    <li><a href="#">من نحن</a></li>
-                    <li><a href="#">اتصل بنا</a></li>
+                    <li><a href="{{route('home', [app()->getLocale()])}}">الرئيسية</a></li>
+                    <li><a href="{{route('about', [app()->getLocale()])}}">من نحن</a></li>
+                    <li><a href="{{route('contact', [app()->getLocale()])}}">اتصل بنا</a></li>
                     <li><a href="#">اشهر الماركات</a></li>
 
                 </ul>
@@ -62,15 +61,15 @@
                 <h4 class="letter-spacing-1">تواصل معنا</h4>
                 <p>اشترك ليصلك كل جديد موقعنا و اخر عروضنا</p>
 
-                <form class="validate" action="php/newsletter.php" method="post" data-success="Subscribed! Thank you!"
-                      data-toastr-position="bottom-right">
+                <form action="{{ route('AddEmail') }}" method="POST">
+                    {{ csrf_field() }}
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input type="email" id="email" name="email" class="form-control required"
-                               placeholder="ادخل البريد الالكترونى الخاص بك">
-									<span class="input-group-btn">
-										<button class="btn btn-primary" type="submit">اشترك معنا</button>
-									</span>
+                               placeholder="ادخل البريد الالكترونى الخاص بك" required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">اشترك معنا</button>
+                                </span>
                     </div>
                 </form>
                 <!-- /Newsletter Form -->

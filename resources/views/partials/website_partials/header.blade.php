@@ -174,9 +174,9 @@
                         <i class="fa fa-search"></i>
                     </a>
                     <div class="search-box">
-                        <form action="page-search-result-1.html" method="get">
+                        <form action="{{route('filter', [app()->getLocale()])}}" method="GET">
                             <div class="input-group">
-                                <input type="text" name="src" placeholder="Search" class="form-control"/>
+                                <input type="text" name="search" placeholder="Search" class="form-control"/>
 											<span class="input-group-btn">
 												<button class="btn btn-primary" type="submit">Search</button>
 											</span>
@@ -190,7 +190,9 @@
                 <!-- QUICK SHOP CART -->
                     <li class="quick-cart">
                         <a href="#">
-                            <span class="badge badge-aqua btn-xs badge-corner">1</span>
+                            <span class="badge badge-aqua btn-xs badge-corner">
+                                {{\App\Http\Controllers\HomeController::cartItemsCount(Auth::user()->id)}}
+                            </span>
                             <i class="fa fa-shopping-cart"></i>
                         </a>
                         <div class="quick-cart-box">
@@ -203,7 +205,7 @@
 
                             <!-- quick cart footer -->
                             <div class="quick-cart-footer clearfix">
-                                <a href="" class="btn btn-primary btn-xs pull-right">شاهد العربة</a>
+                                <a href="{{route('Webcart',['locale'=>app()->getLocale()])}}" class="btn btn-primary btn-xs pull-right">شاهد العربة</a>
                                 <span class="pull-left"><strong>الاجمالى:</strong>{{Session::get('cart_total')}}</span>
                             </div>
                             <!-- /quick cart footer -->

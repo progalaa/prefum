@@ -58,10 +58,11 @@ $(document).ready(function () {
     $("button#add_cart").click(function () {
         var product_id = $(this).data('product');
         var user_id = $(this).data('user');
-        var qty = $("input#qty").val();
+        var qty = $("input.qty").val();
+        console.log(qty);
         $.ajax({
             type: 'POST',
-            url: $("#cart_url").val(),
+            url: $(".cart_url").val(),
             data: {"product_id": product_id, "user_id": user_id,"qty":qty},
             success: function (data) {
                 if(data ==1){
@@ -69,6 +70,7 @@ $(document).ready(function () {
                 }
             }
         });
+
     });
 
     $("a#remove_cart").click(function () {
@@ -141,6 +143,40 @@ $(document).ready(function () {
     });
 
 
+    //filter ajax
+
+    $("button#filter").click(function () {
+        var prices = "";
+        var branding ="";
+        $('input[name="price[]"]:checked').each(function () {
+            var ischecked = $(this).is('input[name="price[]"]:checked');
+            if (ischecked) {
+                prices += $(this).val() + ",";
+            }
+        });
+        $('input[name="brand[]"]:checked').each(function () {
+            var thischecked = $(this).is('input[name="brand[]"]:checked');
+            if (thischecked) {
+                branding += $(this).val() + ",";
+            }
+        });
+        console.log("prices "+prices);
+        console.log("branding "+branding);
+
+        $.ajax({
+            type: 'GET',
+            data: {"branding": branding, "prices": prices},
+        });
+        var filterVal = 'en/filter/'+branding+'/'+prices+'';
+        var currentLocation = window.location.href;
+        //console.log("Location : "+window.location.href);
+        location.replace('en/filter/'+branding+'/'+prices+'');
+    });
+
+
+    $('.checkCheckd').change(function(){
+        $('#filterForm').submit();
+    });
 });
 
 

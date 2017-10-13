@@ -37,7 +37,7 @@
                                 .top-right
                                 .top-left
                         -->
-                           data-plugin-options='{"type":"image"}'><i class="glyphicon glyphicon-search"></i></a>
+                        data-plugin-options='{"type":"image"}'><i class="glyphicon glyphicon-search"></i></a>
 
                         <!--
                             image
@@ -74,9 +74,11 @@
                     <input type="hidden" id="list_url" value="{{ route('AddWishlist') }}">
 
                     <!-- replace data-item-id width the real item ID - used by js/view/demo.shop.js -->
-                    <button class="btn btn-default add_wishlist" id="add_wishlist" data-user="{{ Auth::user()->id }}" data-product="{{$product->id}}" data-toggle="tooltip"
-                       title="اضف للمفضلة"><i class="fa fa-heart nopadding"></i></button>
-
+                    @if(Auth::user())
+                        <button class="btn btn-default add_wishlist" id="add_wishlist"
+                                data-user="{{ Auth::user()->id }}" data-product="{{$product->id}}" data-toggle="tooltip"
+                                title="اضف للمفضلة"><i class="fa fa-heart nopadding"></i></button>
+                    @endif
 
 
                 </div>
@@ -110,19 +112,42 @@
 
                 <hr/>
 
-
+                @if(Auth::user())
+                    <?php
+                    if(Auth::user())
+                        foreach ($carts as $cart){
+                            $ids[] = $cart->product_id;
+                        }
+                    else{
+                        $ids[]=array();
+                    }
+                    $ids[]=array();
+                    ?>
                     <div class="btn-group pull-left product-opt-qty">
-                        <input type="number" id="qty" class="form-control" placeholder="ادخل الكمية الطلوبة"/>
+                        <input type="number" id="qty" class="form-control qty" placeholder="ادخل الكمية الطلوبة"/>
                     </div><!-- /btn-group -->
 
-                    <input type="hidden" id="cart_url" value="{{ route('AddCart') }}">
-                    <button id="add_cart" class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"
-                            data-user="{{ Auth::user()->id }}" data-product="{{$product->id}}"><i
+                    <input type="hidden" class="cart_url" value="{{ route('AddCart') }}">
+                    @if(in_array($product->id,$ids))
+                    <button id="add_cart" class="btn btn-success btn-3d btn-reveal pull-left product-add-cart noradius"
+                            data-user="{{ Auth::user()->id }}" data-product="{{$product->id}}" disabled><i
                                 class="fa fa-shopping-cart"></i>
-                        <span>اضف الى عربة التسوق</span></button>
+                        <span>تمت الإضافة</span></button>
+                    @else
+                            <button id="add_cart" class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"
+                                    data-user="{{ Auth::user()->id }}" data-product="{{$product->id}}"><i
+                                        class="fa fa-shopping-cart"></i>
+                                <span>اضف الى عربة التسوق</span></button>
+                    @endif
+                @else
+                    @if(app()->getLocale() == 'en')
+                        <h3>Please <a href="{{route('login', ['locale' => app()->getLocale()])}}">Login</a> To Buy</h3>
+                    @elseif(app()->getLocale() == 'ar')
+                        <h3>قم  <a href="{{route('login', ['locale' => app()->getLocale()])}}">بتسجيل الدخول</a> لتتمكن من الشراء</h3>
+                @endif
+            @endif
 
-
-                <!-- /FORM -->
+            <!-- /FORM -->
 
 
                 <hr/>
@@ -159,7 +184,7 @@
 
 
                 <!-- rating -->
-                <div >
+                <div>
                     <?php
                     $rate = $rateVal;
                     $non = 5 - $rate;

@@ -7,6 +7,11 @@ Route::get('/{locale}/category/{cat_id}', 'HomeController@category')->name('cate
 Route::get('/{locale}/subCat/{sub_id}', 'HomeController@subCat')->name('subCat');
 Route::get('/{locale}/product/{pro_id}', 'HomeController@product')->name('product');
 Route::get('/{locale}/login', 'HomeController@login')->name('login');
+//Route::get('/{locale}/filter', 'HomeController@filter')->name('filter');
+Route::get('/{locale}/filter', 'HomeController@filter')->name('filter');
+Route::post('email', 'HomeController@sendEmail')->name('email');
+Route::get('/{locale}/contact-us', 'HomeController@contact')->name('contact');
+Route::get('/{locale}/about-us', 'HomeController@about')->name('about');
 
 
 
@@ -17,6 +22,8 @@ $this->post('review', 'HomeController@review')->name('review');
 Route::get('/{locale}/wishlist', 'HomeController@wishlist')->name('wishlist');
 Route::post('/AddWishlist','HomeController@AddWishlist')->name('AddWishlist');
 Route::post('/deleteWishlistItem','HomeController@deleteWishlistItem')->name('deleteWishlistItem');
+
+Route::post('/AddEmail','HomeController@AddEmail')->name('AddEmail');
 
 //cart routes
 Route::get('/{locale}/cart', 'HomeController@cart')->name('Webcart');
@@ -109,4 +116,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     // Cart Products Routes
     Route::resource('cart_products', 'Admin\CartProductsController');
+
+    // Emails routes
+    Route::resource('emails', 'Admin\EmailsController');
+    Route::post('emails_mass_destroy', ['uses' => 'Admin\EmailsController@massDestroy', 'as' => 'emails.mass_destroy']);  // Emails routes
+
+    // mailing_list routes
+    Route::resource('mailing_list', 'Admin\MailingListController');
+    Route::post('mailing_list_mass_destroy', ['uses' => 'Admin\MailingListController@massDestroy', 'as' => 'mailing_list.mass_destroy']);
 });

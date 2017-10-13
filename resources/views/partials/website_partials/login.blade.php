@@ -125,8 +125,32 @@
                                     <div class="row">
                                         <div class="form-group">
 
+                                            <div class="col-md-12 col-sm-12">
+                                                <label>العنوان</label>
+                                                <label class="input margin-bottom-10">
+                                                    <i class="ico-append fa fa-user"></i>
+                                                    <input id="address" type="text" class="form-control"
+                                                           name="address" placeholder="Address"
+                                                           value="{{ old('address') }}">
+                                                    @if ($errors->has('address'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('address') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                    <b class="tooltip tooltip-bottom-right">اكتب عنوانك</b>
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group">
+
                                             <div class="col-md-6 col-sm-6">
-                                                <label for="register:email">الربيد الالكترونى *</label>
+                                                <label for="register:email">البريد الالكترونى *</label>
                                                 <label class="input margin-bottom-10">
                                                     <i class="ico-append fa fa-envelope"></i>
                                                     <input id="email" type="email" class="form-control" name="email"
@@ -141,13 +165,13 @@
                                             </div>
 
                                             <div class="col-md-6 col-sm-6">
-                                                <label for="register:phone">رقم الهاتف</label>
+                                                <label for="register:phone">رقم الهاتف*</label>
                                                 <label class="input margin-bottom-10">
                                                     <i class="ico-append fa fa-phone"></i>
                                                     <input id="phone" type="text" class="form-control"
                                                     name="phone" placeholder="phone"
                                                     value="{{ old('phone') }}" required>
-                                                    <b class="tooltip tooltip-bottom-right">رقم الهاتف (اختيار)</b>
+                                                    <b class="tooltip tooltip-bottom-right">رقم الهاتف</b>
                                                 </label>
                                             </div>
 

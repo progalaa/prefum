@@ -1,3 +1,14 @@
+<?php
+if(Auth::user())
+foreach ($carts as $cart){
+    $ids[] = $cart->product_id;
+}
+else{
+    $ids[]=array();
+}
+$ids[]=array();
+?>
+
 <section class="featured-grid">
     <div class="container">
 
@@ -56,6 +67,7 @@
     </div>
 </section>
 <!-- /FEATURED GRID -->
+
 <section>
     <div class="container">
         <div class="row">
@@ -114,6 +126,38 @@
                                             {{$skin->price}} $
                                         </div>
                                         <!-- /price -->
+                                        <!-- Adding to Cart -->
+
+                                    @if(Auth::user())
+                                        <!--<div class="btn-group pull-left product-opt-qty">
+                                            <input name="qty" type="number" id="qty" class="form-control qty"
+                                                   placeholder="الكمية"/>
+                                        </div>-->
+
+                                            <input type="hidden" class="cart_url" value="{{ route('AddCart') }}">
+                                            <input type="hidden" class="qty" value="1">
+                                            <div>
+
+                                                @if(in_array($skin->id,$ids))
+                                                    <button id="add_cart" class="btn btn-success btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                            data-user="{{ Auth::user()->id }}" data-product="{{$skin->id}}" disabled><i
+                                                                class="fa fa-shopping-cart"></i>
+                                                        <span>تمت الإضافة</span></button>
+                                                @else
+                                                    <button id="add_cart" class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                            data-user="{{ Auth::user()->id }}" data-product="{{$skin->id}}"><i
+                                                                class="fa fa-shopping-cart"></i>
+                                                        <span>اضف للعربة</span></button>
+                                                @endif
+
+                                            </div>
+                                            <br>
+                                        @endif
+                                        *****************
+
+                                        <!-- END Adding to Cart -->
+
+
                                         <!-- rating -->
                                         <div class="shop-item-rating-line">
                                             <div class="rating rating-1 size-11"><!-- rating-0 ... rating-5 --></div>
@@ -181,6 +225,39 @@
                                             {{$lat->price}} $
                                         </div>
                                         <!-- /price -->
+
+                                        <!-- Adding to Cart -->
+
+                                    @if(Auth::user())
+                                        <!--<div class="btn-group pull-left product-opt-qty">
+                                            <input name="qty" type="number" id="qty" class="form-control qty"
+                                                   placeholder="الكمية"/>
+                                        </div>-->
+
+                                            <input type="hidden" class="cart_url" value="{{ route('AddCart') }}">
+                                            <input type="hidden" class="qty" value="1">
+                                            <div>
+
+                                                @if(in_array($lat->id,$ids))
+                                                    <button id="add_cart" class="btn btn-success btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                            data-user="{{ Auth::user()->id }}" data-product="{{$lat->id}}" disabled><i
+                                                                class="fa fa-shopping-cart"></i>
+                                                        <span>تمت الإضافة</span></button>
+                                                @else
+                                                    <button id="add_cart" class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                            data-user="{{ Auth::user()->id }}" data-product="{{$lat->id}}"><i
+                                                                class="fa fa-shopping-cart"></i>
+                                                        <span>اضف للعربة</span></button>
+                                                @endif
+
+                                            </div>
+                                            <br>
+                                        @endif
+                                        *****************
+
+                                        <!-- END Adding to Cart -->
+
+
                                         <!-- rating -->
                                         <div class="shop-item-rating-line">
                                             <div class="rating rating-1 size-11"><!-- rating-0 ... rating-5 --></div>
@@ -253,6 +330,36 @@
                                        {{$ord->price}}  $
                                     </div>
                                     <!-- /price -->
+                                    <!-- Adding to Cart -->
+
+                                @if(Auth::user())
+                                    <!--<div class="btn-group pull-left product-opt-qty">
+                                            <input name="qty" type="number" id="qty" class="form-control qty"
+                                                   placeholder="الكمية"/>
+                                        </div>-->
+
+                                        <input type="hidden" class="cart_url" value="{{ route('AddCart') }}">
+                                        <input type="hidden" class="qty" value="1">
+                                        <div>
+
+                                            @if(in_array($ord->id,$ids))
+                                                <button id="add_cart" class="btn btn-success btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                        data-user="{{ Auth::user()->id }}" data-product="{{$ord->id}}" disabled><i
+                                                            class="fa fa-shopping-cart"></i>
+                                                    <span>تمت الإضافة</span></button>
+                                            @else
+                                                <button id="add_cart" class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                        data-user="{{ Auth::user()->id }}" data-product="{{$ord->id}}"><i
+                                                            class="fa fa-shopping-cart"></i>
+                                                    <span>اضف للعربة</span></button>
+                                            @endif
+
+                                        </div>
+                                        <br>
+                                    @endif
+                                    *****************
+
+                                    <!-- END Adding to Cart -->
                                     <!-- rating -->
                                     <div class="shop-item-rating-line">
                                         <div class="rating rating-1 size-11"><!-- rating-0 ... rating-5 --></div>
@@ -321,6 +428,40 @@
                                         {{$offer->price}}  $
                                     </div>
                                     <!-- /price -->
+
+
+                                    <!-- Adding to Cart -->
+
+                                @if(Auth::user())
+                                    <!--<div class="btn-group pull-left product-opt-qty">
+    <input name="qty" type="number" id="qty" class="form-control qty"
+           placeholder="الكمية"/>
+</div>-->
+
+                                        <input type="hidden" class="cart_url" value="{{ route('AddCart') }}">
+                                        <input type="hidden" class="qty" value="1">
+                                        <div>
+
+                                            @if(in_array($offer->id,$ids))
+                                                <button id="add_cart" class="btn btn-success btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                        data-user="{{ Auth::user()->id }}" data-product="{{$offer->id}}" disabled><i
+                                                            class="fa fa-shopping-cart"></i>
+                                                    <span>تمت الإضافة</span></button>
+                                            @else
+                                                <button id="add_cart" class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                        data-user="{{ Auth::user()->id }}" data-product="{{$offer->id}}"><i
+                                                            class="fa fa-shopping-cart"></i>
+                                                    <span>اضف للعربة</span></button>
+                                            @endif
+
+                                        </div>
+                                        <br>
+                                    @endif
+                                    *****************
+
+                                    <!-- END Adding to Cart -->
+
+
                                     <!-- rating -->
                                     <div class="shop-item-rating-line">
                                         <div class="rating rating-1 size-11"><!-- rating-0 ... rating-5 --></div>
@@ -391,6 +532,36 @@
                                         {{$product->price}} $
                                     </div>
                                     <!-- /price -->
+                                    <!-- Adding to Cart -->
+
+                                @if(Auth::user())
+                                    <!--<div class="btn-group pull-left product-opt-qty">
+    <input name="qty" type="number" id="qty" class="form-control qty"
+           placeholder="الكمية"/>
+</div>-->
+
+                                        <input type="hidden" class="cart_url" value="{{ route('AddCart') }}">
+                                        <input type="hidden" class="qty" value="1">
+                                        <div>
+
+                                            @if(in_array($product->id,$ids))
+                                                <button id="add_cart" class="btn btn-success btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                        data-user="{{ Auth::user()->id }}" data-product="{{$product->id}}" disabled><i
+                                                            class="fa fa-shopping-cart"></i>
+                                                    <span>تمت الإضافة</span></button>
+                                            @else
+                                                <button id="add_cart" class="btn btn-primary btn-3d btn-reveal pull-left product-add-cart noradius"
+                                                        data-user="{{ Auth::user()->id }}" data-product="{{$product->id}}"><i
+                                                            class="fa fa-shopping-cart"></i>
+                                                    <span>اضف للعربة</span></button>
+                                            @endif
+
+                                        </div>
+                                        <br>
+                                    @endif
+                                    *****************
+
+                                    <!-- END Adding to Cart -->
                                     <!-- rating -->
                                     <div class="shop-item-rating-line">
                                         <div class="rating rating-1 size-11"><!-- rating-0 ... rating-5 --></div>
